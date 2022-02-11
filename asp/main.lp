@@ -179,6 +179,8 @@ val(X+1,Y, r23) :- val(X,Y,r22), nat(X), nat(Y).
 val(X-2,Y, r21) :- val(X,Y,r23), nat(X), nat(Y).
 val(X-1,Y, r22) :- val(X,Y,r23), nat(X), nat(Y).
 
+val(X,Y,eee) :- val(X-1,Y,xxx),val(X+1,Y,xxx),val(X,Y-1,xxx),val(X,Y+1,xxx),nat(X),nat(Y),not val(X,Y,xxx).
+
 conta_empty(S) :- S = #count{ X,Y : nat(X), nat(Y), val(X, Y, eee)  }.
 
 #minimize { S : conta_empty(S) }.
