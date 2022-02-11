@@ -286,7 +286,7 @@ void PrintAsp(vector<pair<int, int>> & encoding) {
 
 int main()
 {
-    auto encoding = Encode({"giacomo", "ettore", "farlocco"});
+    auto encoding = Encode({"hello", "world"});
 
     PrintAsp(encoding);
 }
