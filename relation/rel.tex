@@ -3,6 +3,28 @@
 \usepackage[utf8]{inputenc}
 \usepackage{scrextend}
 \usepackage{graphicx}
+\usepackage[edges]{forest}
+
+\definecolor{foldercolor}{RGB}{124,166,198}
+
+\tikzset{pics/folder/.style={code={%
+    \node[inner sep=0pt, minimum size=#1](-foldericon){};
+    \node[folder style, inner sep=0pt, minimum width=0.3*#1, minimum height=0.3*#1, above right, xshift=0.05*#1] at (-foldericon.west){};
+    \node[folder style, inner sep=0pt, minimum size=#1] at (-foldericon.center){};}
+    },
+    pics/folder/.default={20pt},
+    folder style/.style={draw=foldercolor!80!black,top color=foldercolor!40,bottom color=foldercolor}
+}
+
+\forestset{is file/.style={edge path'/.expanded={%
+        ([xshift=\forestregister{folder indent}]!u.parent anchor) |- (.child anchor)},
+        inner sep=1pt},
+    this folder size/.style={edge path'/.expanded={%
+        ([xshift=\forestregister{folder indent}]!u.parent anchor) |- (.child anchor) pic[solid]{folder=0.7*#1}}, inner sep=0.2*#1},
+    folder tree indent/.style={before computing xy={l=0.6*#1}},
+    folder icons/.style={folder, this folder size=#1, folder tree indent=3*#1},
+    folder icons/.default={12pt},
+}
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -29,23 +51,49 @@ Si presenterà un algoritmo che tenta di minimizzare le celle empty scegliendo d
 Quindi si può dare in input un numero molto alto di pezzi al fine di "semplificare" la minimizzazione, sebbene si rischia in questo caso di fare utilizzare gli stessi tipi di pezzi quasi ovunque.\\
 Nella sezione dei risultati vedremo infatti che se abbiamo a disposizione un elevato numero di pezzi ($3*l + 4*s + 3*r \gg n*n$) allora il solving è "facile", rispetto a un numero quasi giusto di pezzi ($3*l + 4*s + 3*r \simeq n*n$).
 
-\section{Soluzione in minizinc}
-Il programma che risolve il problema è \textit{main.mzn}.\\
-Prende in input i seguenti parametri:
+\section{Struttura della folder}
+\begin{forest}
+    for tree={font=\sffamily, grow'=0,
+    folder indent=.9em, folder icons,
+    edge=densely dotted}
+    [main folder
+      [images
+          [wallpapers]
+          [logo.pdf, is file]]
+      [tex-files
+          [chapter1.tex, is file]]
+      [main.tex, is file]
+      [main.aux, is file]
+    ]
+  \end{forest}
+\section{Soluzione}
+L'idea utilizzata per la realizzazione dei modelli è la stessa sia per il modello in minizinc che per quello in asp. Parlando a livello non-implementativo, è la seguente: il programma prende in input i seguenti parametri:
 \begin{itemize}
-    \item \textit{n} (intero): dimensione della board;
-    \item \textit{l} (intero): numero di L (2x2) disponibili;
-    \item \textit{s} (intero): numero di quadrati (2x2) disponibili;
-    \item \textit{r} (intero): numero di rettangoli (1x3) disponibili;
-    \item \textit{f} (intero): numero di celle vietate/forbidden/già occupate;
-    \item \textit{forbidden} (array): array lungo $f$ di coordinate $X,Y$.
+    \item \texttt{n} (intero): dimensione della board;
+    \item \texttt{l} (intero): numero di L (2x2) disponibili;
+    \item \texttt{s} (intero): numero di quadrati (2x2) disponibili;
+    \item \texttt{r} (intero): numero di rettangoli (1x3) disponibili;
+    \item \texttt{f} (intero): numero di celle vietate/forbidden/già occupate;
+    \item \texttt{forbidden} (array): array lungo $f$ di coordinate $X,Y$ (sono dei fatti/facts in asp ovviamente).
 \end{itemize}
-La board è una matrice (array bi-dimensionale) $n$ x $n$ il cui dominio è definito dalla seguente enumerazione: XXX, EEE, S11, S12, S13, S14, R11, R12, R13, R21, R22, R23, L11, L12, L13, L21, L22, L23, L31, L32, L33, L41, L42, L43.\\
+La board è una matrice (array bi-dimensionale) $n$ x $n$ il cui dominio è definito dalla seguente enumerazione: \texttt{XXX, EEE, S11, S12, S13, S14, R11, R12, R13, R21, R22, R23, L11, L12, L13, L21, L22, L23, L31, L32, L33, L41, L42, L43}.\\
 Al fine di rendere comprensibile l'enumerazione si osservi la figura qui di seguito.\\
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=0.7\textwidth]{shapes}
     \caption{Tutte le possibili shapes con rotazioni}
 \end{figure}
-Quindi ogni cella può assumere uno di quei valori dell'enumerazione, si è quindi proceduto a definire dei vincoli che mantengano le forme corrette.
+Quindi ogni cella può assumere uno di quei valori dell'enumerazione, si è quindi proceduto a definire dei vincoli che mantengano le forme corrette.\\
+Ho utilizzato tale "metodo" al fine di evitare sovrapposizioni indesiderate dei pezzi. \\
+
+\subsection{Ulteriori idee}
+Avevo pensato ad altre due modellazioni che però nell'implementazione poi si sono rivelate errate/inefficienti:
+\begin{itemize}
+    \item indicare con 1 le L, con 2 i quadrati e con 3 i rettangoli, con 0 le empty cells e con -1 i forbidden; tuttavia, sebbene il dominio in questo casi sia notevolmente ridotto, con tale metodo non si riescono a gestire efficientemente le sovrapposizioni di forme uguali con diverse rotazioni
+    \item enumerare ogni pezzo mantenendo il tipo salvato in un "array" lungo $k$ con $k=l+s+r$ (per esempio, ignorando le celle empty e forbidden, se abbiamo $k=2+1+3$ avremmo che il dominio delle celle della board è $1..k$ = $1..6$ e manteniamo un ulteriore array lungo k per indicare il tipo: [1,1,2,3,3,3]), in modo tale che il tipo indichi quali constraint il pezzo i-esimo debba avere e non ci sono sicuramente sovrapposizioni in quanto un pezzo di forma uguale avrebbe un $j!=i$ come "valore" e ogni "valore" può comparire al più 3 o 4 volte nella board a seconda della forma (rispettivamente se L/rettangolo o quadrato); tuttavia questo metodo si è rivelato altamente inefficiente in quanto i domini erano molto più grandi rispetto alla soluzione scelta e portavano quindi a tempi molto più elevati anche con strategie di \texttt{int\_search} (per minizinc) personalizzate;
+\end{itemize}
+
+\section{Risultati minizinc}
+
+
 \end{document}
