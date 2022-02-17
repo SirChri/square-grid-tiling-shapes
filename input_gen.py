@@ -50,7 +50,7 @@ for i in range(1+current_max_input,q+1+current_max_input):
     out_content = local_search_base_content
     out_content += "\n"
     for (j,l) in random_couples:
-        out_content += "{}, {}\n".format(j,l)
+        out_content += "{} {}\n".format(j,l)
     
     with open(os.path.join(sys.path[0], 'inputs/input{}.{}'.format(str(i), local_search_format)), "w") as text_file:
         text_file.write(out_content)
