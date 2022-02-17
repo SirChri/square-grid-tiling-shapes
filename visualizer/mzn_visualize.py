@@ -1,14 +1,25 @@
 from cgitb import text
-import sys, json, re, subprocess, os
+import sys, json, re, subprocess, os, shutil
 
-mainfile = sys.argv[1]
-inputfile = sys.argv[2]
+solver = sys.argv[1]
+mainfile = sys.argv[2]
+inputfile = sys.argv[3]
+out_filepath = sys.argv[4] if len(sys.argv) > 4 else None
 
-bashCommand = 'minizinc {} {} -O2 --solver gecode --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg ""'.format(mainfile, inputfile)
+if not out_filepath:
+    out_filepath = os.path.join(sys.path[0], 'output.html')
+else:
+    shutil.copyfile(os.path.join(sys.path[0], 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
+
+bashCommand = 'minizinc {} {} -O2 --solver {} --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg ""'.format(mainfile, inputfile, solver)
 process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 output, error = process.communicate()
-jsondata = re.sub(r'^\%.*\n?', '', output, flags=re.MULTILINE).strip()[:-5]
+jsondata = re.sub(r'^\%.*\n?|^\"\"', '', output, flags=re.MULTILINE).strip()
 statsdata = {}
+
+if error:
+    print("an error has eccurred: {}".format(error))
+    exit(1)
 
 for line in output.splitlines():
     if(line.startswith("%%%mzn-stat: ")):
@@ -17,8 +28,12 @@ for line in output.splitlines():
         val = line.split("=")[1]
         statsdata[key] = val
 
-data = json.loads(jsondata)
-
+if jsondata != "=====UNKNOWN=====" and jsondata != "" and jsondata != "=====ERROR=====":
+    data = json.loads(jsondata)
+else:
+    print(jsondata)
+    print("No solutions were found for {}".format(inputfile))
+    exit(1)
 
 ## Input file read
 textarea_input = ""
@@ -36,7 +51,7 @@ div_items = ""
 stats = "<ul>"
 for key in statsdata:
     value = statsdata[key]
-    stats += "<li><b>"+key+"</b>: "+str(value)+" sec</li>"
+    stats += "<li><b>"+key+"</b>: "+str(value)+"</li>"
 stats += "</ul>"
 
 for arr in data["Board"]:
@@ -86,5 +101,5 @@ out_content = """
     </body>
 </html>
 """       
-with open(os.path.join(sys.path[0], 'main.html'), "w") as text_file:
+with open(out_filepath, "w") as text_file:
     text_file.write(out_content)

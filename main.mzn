@@ -130,10 +130,7 @@ forall(x, y in 1..n where Board[x, y] != XXX /\ Board[x, y] != EEE) (
 
 
 %% Optimize
-solve :: seq_search([
-	int_search(Board, first_fail, indomain_random, complete)
-])
-minimize obj;
+solve minimize obj;
 
 
 %% Output

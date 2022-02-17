@@ -1,0 +1,60 @@
+#const n = 35.
+#const l = 125.
+#const s = 118.
+#const r = 118.
+#const f = 55.
+val(25, 22, xxx).
+val(16, 11, xxx).
+val(14, 22, xxx).
+val(30, 28, xxx).
+val(34, 4, xxx).
+val(12, 20, xxx).
+val(34, 20, xxx).
+val(31, 24, xxx).
+val(31, 32, xxx).
+val(14, 1, xxx).
+val(11, 21, xxx).
+val(12, 30, xxx).
+val(15, 6, xxx).
+val(31, 15, xxx).
+val(7, 14, xxx).
+val(16, 2, xxx).
+val(1, 12, xxx).
+val(13, 19, xxx).
+val(24, 33, xxx).
+val(25, 4, xxx).
+val(21, 17, xxx).
+val(3, 24, xxx).
+val(28, 26, xxx).
+val(25, 20, xxx).
+val(7, 35, xxx).
+val(11, 14, xxx).
+val(18, 18, xxx).
+val(34, 35, xxx).
+val(32, 17, xxx).
+val(7, 34, xxx).
+val(33, 18, xxx).
+val(24, 4, xxx).
+val(18, 9, xxx).
+val(10, 35, xxx).
+val(27, 6, xxx).
+val(33, 12, xxx).
+val(21, 20, xxx).
+val(13, 25, xxx).
+val(19, 22, xxx).
+val(35, 29, xxx).
+val(15, 31, xxx).
+val(33, 4, xxx).
+val(22, 23, xxx).
+val(18, 11, xxx).
+val(18, 33, xxx).
+val(1, 28, xxx).
+val(13, 4, xxx).
+val(10, 3, xxx).
+val(32, 4, xxx).
+val(30, 18, xxx).
+val(31, 29, xxx).
+val(2, 27, xxx).
+val(1, 35, xxx).
+val(18, 21, xxx).
+val(9, 31, xxx).

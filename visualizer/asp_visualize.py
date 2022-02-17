@@ -1,18 +1,30 @@
 from cgitb import text
 import sys, json, os
 import subprocess
-
-mainfile = sys.argv[1]
-inputfile = sys.argv[2]
-
-bashCommand = "clingo {} {} --parallel 10 --quiet=1 --out-hide-aux --outf=2 --time-limit=300 --warn none".format(mainfile, inputfile)
-process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-output, error = process.communicate()
+import shutil
+    
 class Cell:
     def __init__(self, row, col, val):
         self.row = row
         self.col = col
         self.val = val
+
+mainfile = sys.argv[1]
+inputfile = sys.argv[2]
+out_filepath = sys.argv[3] if len(sys.argv) > 3 else None
+
+if not out_filepath:
+    out_filepath = os.path.join(sys.path[0], 'output.html')
+else:
+    shutil.copyfile(os.path.join(sys.path[0], 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
+
+bashCommand = "clingo {} {} --parallel 10 --quiet=1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy".format(mainfile, inputfile)
+process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+output, error = process.communicate()
+
+if error:
+    print("an error has eccurred: {}".format(error))
+    exit(1)
 
 data = json.loads(output)
 
@@ -38,7 +50,7 @@ try:
     time = "<ul>"
     for key in data["Time"]:
         value = data["Time"][key]
-        time += "<li><b>"+key+"</b>: "+str(value)+" sec</li>"
+        time += "<li><b>"+key+"</b>: "+str(value)+"</li>"
     time += "</ul>"
 
     ## Models
@@ -106,8 +118,8 @@ try:
             </div>
         </body>
     </html>
-    """       
-    with open(os.path.join(sys.path[0], 'main.html'), "w") as text_file:
+    """
+    with open(out_filepath, "w") as text_file:
         text_file.write(out_content)
 except:
     raise Exception('Something went wrong while searching the solution: '+json.dumps(data))
