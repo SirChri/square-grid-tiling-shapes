@@ -23,6 +23,10 @@ s = {};
 r = {};
 f = {};""".format(n,l,s,r,f)
 
+#default for local search optimizer (https://github.com/vash96/optimization-challenges)
+local_search_format = "txt"
+local_search_base_content = "{}\n{} {} {} {}".format(n,s,r,l,f)
+
 couples = [(i+1,j+1) for i in range(n) for j in range(n)]
 
 #create input dir if not exists
@@ -42,20 +46,11 @@ for i in range(1+current_max_input,q+1+current_max_input):
     random.shuffle(couples)
     random_couples = couples[:f]
 
-    #mzn
-    out_content = mzn_base_content
-    out_content += "\n"+"forbidden = ["
+    #local_search
+    out_content = local_search_base_content
+    out_content += "\n"
     for (j,l) in random_couples:
-        out_content += "| {}, {}\n\t".format(j,l)
-    out_content += "|];"
+        out_content += "{}, {}\n".format(j,l)
     
-    with open(os.path.join(sys.path[0], 'inputs/input{}.{}'.format(str(i), mzn_input_format)), "w") as text_file:
-        text_file.write(out_content)
-
-    #lp
-    out_content = lp_base_content
-    for (j,l) in random_couples:
-        out_content += "\n" + "val({}, {}, xxx).".format(j,l)
-    
-    with open(os.path.join(sys.path[0], 'inputs/input{}.{}'.format(str(i), lp_input_format)), "w") as text_file:
+    with open(os.path.join(sys.path[0], 'inputs/input{}.{}'.format(str(i), local_search_format)), "w") as text_file:
         text_file.write(out_content)
