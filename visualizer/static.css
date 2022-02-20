@@ -18,7 +18,6 @@
 
 .right {
 	right: 0;
-	/*padding: 10px;*/
 }
 
 .input-textarea {
@@ -40,139 +39,63 @@
 	content: '';
 }
 
+.e, .x {
+	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
+}
+
 .e {
 	background: #eae2b7;
-	/*border-width: 1px 1px 1px 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
-
-
-/* dx, sotto, sx, su */
-
 .x {
 	background: #7c7c7c;
-	/*border-width: 1px 1px 1px 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
-
 .l {
 	background: #fcbf49;
 }
-
-.l11 {
-	/*border-width: 1px 1px 0 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
-}
-
-.l12 {
-	/*border-width: 0 0 1px 1px;*/
-	box-shadow: inset 0 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 0 0 black;
-}
-
-.l13 {
-	/*border-width: 1px 1px 1px 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 1px 0 black;
-}
-
-.l21 {
-	/*border-width: 1px 1px 1px 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 1px 0 black;
-}
-
-.l22 {
-	/*border-width: 1px 0 0 1px;*/
-	box-shadow: inset 0 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
-}
-
-.l23 {
-	/*border-width: 0 1px 1px 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 0 0 black;
-}
-
-.l31 {
-	/*border-width: 0 1px 1px 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 0 0 black;
-}
-
-.l32 {
-	/*border-width: 1px 1px 0 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 0 0 0 black, inset 0 1px 0 black;
-}
-
-.l33 {
-	/*border-width: 1px 0 1px 1px;*/
-	box-shadow: inset 0 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
-}
-
-.l41 {
-	/*border-width: 1px 0 1px 1px;*/
-	box-shadow: inset 0 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
-}
-
-.l42 {
-	/*border-width: 0 1px 1px 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 0 0 black;
-}
-
-.l43 {
-	/*border-width: 1px 1px 0 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
-}
-
 .s {
-	background-color: #f77f00;
+	background: #f77f00;
+}
+.r {
+	background: #d62828;
 }
 
-.s11 {
-	/*border-width: 1px 0 0 1px;*/
-	box-shadow: inset 0 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
+
+.l11, .r21, .l43 {
+	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
 
-.s12 {
-	/*border-width: 1px 1px 0 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 0 0 0 black, inset 0 1px 0 black;
-}
-
-.s13 {
-	/*border-width: 0 0 1px 1px;*/
+.l12, .s13 {
 	box-shadow: inset 0 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 0 0 black;
 }
 
-.s14 {
-	/*border-width: 0 1px 1px 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 0 0 black;
+.l13, .l21, .r13 {
+	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 1px 0 black;
 }
 
-.r {
-	background-color: #d62828;
+.l22, .s11 {
+	box-shadow: inset 0 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
 
-.r11 {
-	/*border-width: 1px 0 1px 1px;*/
+.l23, .r23, .l31 {
+	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 0 0 black;
+}
+
+.l32, .s12 {
+	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 0 0 0 black, inset 0 1px 0 black;
+}
+
+.l33, .l41, .r11 {
 	box-shadow: inset 0 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
+}
+
+.l42, .s14 {
+	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 0 0 black;
 }
 
 .r12 {
-	/*border-width: 1px 0 1px 0;*/
 	box-shadow: inset 0 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 1px 0 black;
 }
 
-.r13 {
-	/*border-width: 1px 1px 1px 0;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 0 0 0 black, inset 0 1px 0 black;
-}
-
-.r21 {
-	/*border-width: 1px 1px 0 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
-}
-
 .r22 {
-	/*border-width: 0 1px 0 1px;*/
 	box-shadow: inset -1px 0 0 black, inset 0 0 0 black, inset 1px 0 0 black, inset 0 0 0 black;
-}
-
-.r23 {
-	/*border-width: 0 1px 1px 1px;*/
-	box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 0 0 black;
 }

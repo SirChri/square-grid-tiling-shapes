@@ -27,16 +27,6 @@
 % 
 % 
 
-% #const n = 8.
-% #const l = 2.
-% #const s = 2.
-% #const r = 1.
-% #const f = 4.
-% val(1,1,xxx).
-% val(1,2,xxx).
-% val(2,1,xxx).
-% val(3,1,xxx).
-
 dom(eee;xxx;l11;l12;l13;l21;l22;l23;l31;l32;l33;l41;l42;l43;r11;r12;r13;r21;r22;r23;s11;s12;s13;s14).
 nat(1..n).
 
@@ -178,8 +168,6 @@ val(X+1,Y, r23) :- val(X,Y,r22), nat(X), nat(Y).
 :- val(2,Y,r23).
 val(X-2,Y, r21) :- val(X,Y,r23), nat(X), nat(Y).
 val(X-1,Y, r22) :- val(X,Y,r23), nat(X), nat(Y).
-
-val(X,Y,eee) :- val(X-1,Y,xxx),val(X+1,Y,xxx),val(X,Y-1,xxx),val(X,Y+1,xxx),nat(X),nat(Y),not val(X,Y,xxx).
 
 conta_empty(S) :- S = #count{ X,Y : nat(X), nat(Y), val(X, Y, eee)  }.
 

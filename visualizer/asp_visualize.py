@@ -1,7 +1,5 @@
 from cgitb import text
-import sys, json, os
-import subprocess
-import shutil
+import sys, json, os, subprocess, shutil, re
     
 class Cell:
     def __init__(self, row, col, val):
@@ -18,15 +16,18 @@ if not out_filepath:
 else:
     shutil.copyfile(os.path.join(sys.path[0], 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
 
-bashCommand = "clingo {} {} --parallel 10 --quiet=1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy".format(mainfile, inputfile)
+bashCommand = "clingo {} {} -t8 --quiet=1,1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy --opt-strategy=bb,inc".format(mainfile, inputfile)
 process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 output, error = process.communicate()
 
 if error:
     print("an error has eccurred: {}".format(error))
     exit(1)
-
+    
 data = json.loads(output)
+
+#output
+vis_output = {}
 
 try: 
 
@@ -35,6 +36,16 @@ try:
     with open(inputfile, "r") as text_file:
         textarea_input += '<textarea disabled="disabled" class="input-textarea">'
         for x in text_file:
+            if x.strip().replace(" ", "").startswith("#constn="):
+                vis_output["n"] = re.findall('\d+', x)[0]
+            elif x.strip().replace(" ", "").startswith("#constl="):
+                vis_output["l"] = re.findall('\d+', x)[0]
+            elif x.strip().replace(" ", "").startswith("#constr="):
+                vis_output["r"] = re.findall('\d+', x)[0]
+            elif x.strip().replace(" ", "").startswith("#consts="):
+                vis_output["s"] = re.findall('\d+', x)[0]
+            elif x.strip().replace(" ", "").startswith("#constf="):
+                vis_output["f"] = re.findall('\d+', x)[0]
             textarea_input += x
         textarea_input += '</textarea>'
 
@@ -49,6 +60,8 @@ try:
     ## Time
     time = "<ul>"
     for key in data["Time"]:
+        if key == "Total":
+            vis_output["time"] = data["Time"][key]
         value = data["Time"][key]
         time += "<li><b>"+key+"</b>: "+str(value)+"</li>"
     time += "</ul>"
@@ -56,6 +69,10 @@ try:
     ## Models
     models = "<ul>"
     for key in data["Models"]:
+        if key == "Optimal":
+            vis_output["opt"] = data["Models"][key] == 1
+        if key == "Costs":
+            vis_output["cost"] = data["Models"][key][0]
         value = data["Models"][key]
         models += "<li><b>"+key+"</b>: "+str(value)+"</li>"
     models += "</ul>"
@@ -74,6 +91,8 @@ try:
             cell = cells[str(i)+"-"+str(j)]
             general_cls = cell.val.lower()[0]
             div_items += '<div class="'+general_cls+' '+cell.val.lower()+'"></div>'
+
+    vis_output["n"] = n
 
     out_content = """
     <html>
@@ -121,5 +140,7 @@ try:
     """
     with open(out_filepath, "w") as text_file:
         text_file.write(out_content)
+
+    print(vis_output)
 except:
     raise Exception('Something went wrong while searching the solution: '+json.dumps(data))
