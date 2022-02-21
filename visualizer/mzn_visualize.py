@@ -15,6 +15,8 @@ else:
 bashCommand = 'minizinc {} {} -O2 --solver {} --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg "OPTIMUM"'.format(mainfile, inputfile, solver)
 process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 output, error = process.communicate()
+output = output.decode('utf-8')
+
 jsondata = re.sub(r'^\%.*\n?|^\"\"|^\"OPTIMUM\"', '', output, flags=re.MULTILINE).strip()
 statsdata = {}
 

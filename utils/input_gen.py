@@ -33,10 +33,10 @@ if not os.path.exists(out_filepath):
 
 #get current max input number of asp inputs (could either be for mzn)
 current_inputs = glob.glob(out_filepath+"/*.{}".format(lp_input_format))
-current_inputs = map(lambda x: int(re.findall('\d+', x)[0]), current_inputs)
+current_inputs = list(map(lambda x: int(re.findall('\d+', x)[0]), current_inputs))
 
 current_max_input = 0
-if current_inputs:
+if current_inputs and len(current_inputs) > 0:
     current_max_input = max(current_inputs)
 
 # create the same random instances for both lp and mzn inputs
