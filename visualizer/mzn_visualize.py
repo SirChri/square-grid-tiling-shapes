@@ -5,11 +5,12 @@ solver = sys.argv[1]
 mainfile = sys.argv[2]
 inputfile = sys.argv[3]
 out_filepath = sys.argv[4] if len(sys.argv) > 4 else None
+file_path = os.path.abspath(os.path.dirname(__file__))
 
 if not out_filepath:
-    out_filepath = os.path.join(sys.path[0], 'output.html')
+    out_filepath = os.path.join(file_path, 'output.html')
 else:
-    shutil.copyfile(os.path.join(sys.path[0], 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
+    shutil.copyfile(os.path.join(file_path, 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
 
 bashCommand = 'minizinc {} {} -O2 --solver {} --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg "OPTIMUM"'.format(mainfile, inputfile, solver)
 process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)

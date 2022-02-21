@@ -6,6 +6,7 @@ l = int(sys.argv[3])
 s = int(sys.argv[4])
 r = int(sys.argv[5])
 f = int(sys.argv[6])
+out_filepath = sys.argv[8] if len(sys.argv) > 8 else os.path.join(sys.path[0] +"/..", 'inputs')
 
 #default for asp
 lp_input_format = "lp"
@@ -25,12 +26,13 @@ f = {};""".format(n,l,s,r,f)
 
 couples = [(i+1,j+1) for i in range(n) for j in range(n)]
 
+print("creating {}".format(out_filepath))
 #create input dir if not exists
-if not os.path.exists(os.path.join(sys.path[0], 'inputs')):
-    os.mkdir(os.path.join(sys.path[0], 'inputs'))
+if not os.path.exists(out_filepath):
+    os.mkdir(out_filepath)
 
 #get current max input number of asp inputs (could either be for mzn)
-current_inputs = glob.glob(os.path.join(sys.path[0], 'inputs')+"/*.{}".format(lp_input_format))
+current_inputs = glob.glob(out_filepath+"/*.{}".format(lp_input_format))
 current_inputs = map(lambda x: int(re.findall('\d+', x)[0]), current_inputs)
 
 current_max_input = 0
@@ -49,7 +51,7 @@ for i in range(1+current_max_input,q+1+current_max_input):
         out_content += "| {}, {}\n\t".format(j,l)
     out_content += "|];"
     
-    with open(os.path.join(sys.path[0], 'inputs/input{}.{}'.format(str(i), mzn_input_format)), "w") as text_file:
+    with open(out_filepath+'/input{}.{}'.format(str(i), mzn_input_format), "w") as text_file:
         text_file.write(out_content)
 
     #lp
@@ -57,5 +59,5 @@ for i in range(1+current_max_input,q+1+current_max_input):
     for (j,l) in random_couples:
         out_content += "\n" + "val({}, {}, xxx).".format(j,l)
     
-    with open(os.path.join(sys.path[0], 'inputs/input{}.{}'.format(str(i), lp_input_format)), "w") as text_file:
+    with open(out_filepath+'/input{}.{}'.format(str(i), lp_input_format), "w") as text_file:
         text_file.write(out_content)
