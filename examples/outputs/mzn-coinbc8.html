@@ -1,0 +1,99 @@
+
+<html>
+    <head>
+        <title>Output</title>
+        <link rel="stylesheet" href="static.css">
+        <style>
+            .grid {
+            display: grid; 
+
+            grid-template-rows: repeat(20, 1fr);
+            grid-template-columns: repeat(20, 1fr);
+            
+            gap: 0px;
+            /*margin-top: 60px;*/
+            height: 95%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="body">
+            <div class="split left">
+                <div class="program-instance">
+                    <h2>Program instance</h2>
+                    <textarea disabled="disabled" class="input-textarea">n = 20;
+l = 150;
+s = 100;
+r = 120;
+f = 55;
+forbidden = [| 7, 15
+	| 20, 7
+	| 3, 15
+	| 2, 6
+	| 18, 18
+	| 16, 12
+	| 7, 16
+	| 4, 8
+	| 3, 6
+	| 10, 12
+	| 5, 10
+	| 2, 5
+	| 3, 8
+	| 1, 2
+	| 3, 20
+	| 13, 18
+	| 12, 10
+	| 13, 15
+	| 11, 10
+	| 4, 16
+	| 1, 6
+	| 18, 3
+	| 6, 14
+	| 17, 9
+	| 13, 9
+	| 13, 16
+	| 19, 4
+	| 7, 18
+	| 7, 11
+	| 19, 5
+	| 2, 18
+	| 11, 18
+	| 14, 11
+	| 19, 14
+	| 10, 9
+	| 18, 9
+	| 1, 18
+	| 20, 14
+	| 10, 3
+	| 8, 20
+	| 16, 19
+	| 15, 8
+	| 8, 6
+	| 8, 5
+	| 14, 15
+	| 13, 11
+	| 18, 7
+	| 7, 14
+	| 11, 12
+	| 7, 20
+	| 5, 7
+	| 4, 4
+	| 19, 9
+	| 16, 2
+	| 2, 2
+	|];</textarea>
+                </div>
+
+                <div class="sol-statistics">
+                    <h2>Solution statistics</h2>
+                    <ul><li><b>evaluatedReifiedConstraints</b>: 8280</li><li><b>paths</b>: 27228</li><li><b>flatTime</b>: 5.07286</li><li><b>flatIntConstraints</b>: 23154</li><li><b>solveTime</b>: 9.2525</li><li><b>flatIntVars</b>: 10572</li><li><b>objectiveBound</b>: 0</li><li><b>eliminatedLinearConstraints</b>: 7590</li><li><b>nSolutions</b>: 1</li><li><b>openNodes</b>: -1</li><li><b>objective</b>: 0</li><li><b>nodes</b>: 0</li><li><b>method</b>: "minimize"</li><li><b>evaluatedHalfReifiedConstraints</b>: 7590</li><li>Optimum found: True</li></ul>
+                </div>
+            </div>
+            <div class="split right">
+                <div class="grid">
+                    <div class="r r21"></div><div class="x xxx"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="l l33"></div><div class="l l32"></div><div class="s s11"></div><div class="s s12"></div><div class="l l22"></div><div class="l l21"></div><div class="l l43"></div><div class="r r21"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="s s11"></div><div class="s s12"></div><div class="r r22"></div><div class="x xxx"></div><div class="l l33"></div><div class="l l32"></div><div class="x xxx"></div><div class="x xxx"></div><div class="r r21"></div><div class="l l31"></div><div class="s s13"></div><div class="s s14"></div><div class="l l23"></div><div class="l l41"></div><div class="l l42"></div><div class="r r22"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="s s13"></div><div class="s s14"></div><div class="r r23"></div><div class="s s11"></div><div class="s s12"></div><div class="l l31"></div><div class="l l11"></div><div class="x xxx"></div><div class="r r22"></div><div class="x xxx"></div><div class="s s11"></div><div class="s s12"></div><div class="l l22"></div><div class="l l21"></div><div class="l l43"></div><div class="r r23"></div><div class="x xxx"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="r r21"></div><div class="x xxx"></div><div class="r r21"></div><div class="s s13"></div><div class="s s14"></div><div class="x xxx"></div><div class="l l12"></div><div class="l l13"></div><div class="r r23"></div><div class="x xxx"></div><div class="s s13"></div><div class="s s14"></div><div class="l l23"></div><div class="l l41"></div><div class="l l42"></div><div class="s s11"></div><div class="s s12"></div><div class="x xxx"></div><div class="l l22"></div><div class="l l21"></div><div class="r r22"></div><div class="r r21"></div><div class="r r22"></div><div class="r r21"></div><div class="r r21"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="s s11"></div><div class="s s12"></div><div class="x xxx"></div><div class="l l43"></div><div class="s s11"></div><div class="s s12"></div><div class="s s13"></div><div class="s s14"></div><div class="l l43"></div><div class="l l23"></div><div class="l l43"></div><div class="r r23"></div><div class="r r22"></div><div class="r r23"></div><div class="r r22"></div><div class="r r22"></div><div class="s s11"></div><div class="s s12"></div><div class="s s11"></div><div class="s s12"></div><div class="s s13"></div><div class="s s14"></div><div class="l l41"></div><div class="l l42"></div><div class="s s13"></div><div class="s s14"></div><div class="x xxx"></div><div class="l l41"></div><div class="l l42"></div><div class="l l41"></div><div class="l l42"></div><div class="r r21"></div><div class="r r23"></div><div class="r r21"></div><div class="r r23"></div><div class="r r23"></div><div class="s s13"></div><div class="s s14"></div><div class="s s13"></div><div class="s s14"></div><div class="l l43"></div><div class="l l33"></div><div class="l l32"></div><div class="x xxx"></div><div class="l l33"></div><div class="l l32"></div><div class="x xxx"></div><div class="x xxx"></div><div class="x xxx"></div><div class="l l43"></div><div class="x xxx"></div><div class="r r22"></div><div class="x xxx"></div><div class="r r22"></div><div class="s s11"></div><div class="s s12"></div><div class="r r21"></div><div class="x xxx"></div><div class="x xxx"></div><div class="l l41"></div><div class="l l42"></div><div class="l l43"></div><div class="l l31"></div><div class="l l33"></div><div class="l l32"></div><div class="l l31"></div><div class="l l33"></div><div class="l l32"></div><div class="l l41"></div><div class="l l42"></div><div class="r r21"></div><div class="r r23"></div><div class="x xxx"></div><div class="r r23"></div><div class="s s13"></div><div class="s s14"></div><div class="r r22"></div><div class="r r21"></div><div class="r r21"></div><div class="l l11"></div><div class="l l41"></div><div class="l l42"></div><div class="s s11"></div><div class="s s12"></div><div class="l l31"></div><div class="s s11"></div><div class="s s12"></div><div class="l l31"></div><div class="l l43"></div><div class="r r21"></div><div class="r r22"></div><div class="s s11"></div><div class="s s12"></div><div class="r r21"></div><div class="r r21"></div><div class="x xxx"></div><div class="r r23"></div><div class="r r22"></div><div class="r r22"></div><div class="l l12"></div><div class="l l13"></div><div class="x xxx"></div><div class="s s13"></div><div class="s s14"></div><div class="x xxx"></div><div class="s s13"></div><div class="s s14"></div><div class="l l41"></div><div class="l l42"></div><div class="r r22"></div><div class="r r23"></div><div class="s s13"></div><div class="s s14"></div><div class="r r22"></div><div class="r r22"></div><div class="s s11"></div><div class="s s12"></div><div class="r r23"></div><div class="r r23"></div><div class="l l22"></div><div class="l l21"></div><div class="l l43"></div><div class="x xxx"></div><div class="l l11"></div><div class="x xxx"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="l l43"></div><div class="r r23"></div><div class="x xxx"></div><div class="s s11"></div><div class="s s12"></div><div class="r r23"></div><div class="r r23"></div><div class="s s13"></div><div class="s s14"></div><div class="l l22"></div><div class="l l21"></div><div class="l l23"></div><div class="l l41"></div><div class="l l42"></div><div class="x xxx"></div><div class="l l12"></div><div class="l l13"></div><div class="s s11"></div><div class="s s12"></div><div class="l l41"></div><div class="l l42"></div><div class="l l22"></div><div class="l l21"></div><div class="s s13"></div><div class="s s14"></div><div class="s s11"></div><div class="s s12"></div><div class="s s11"></div><div class="s s12"></div><div class="l l23"></div><div class="l l33"></div><div class="l l32"></div><div class="l l11"></div><div class="x xxx"></div><div class="r r21"></div><div class="x xxx"></div><div class="r r21"></div><div class="s s13"></div><div class="s s14"></div><div class="x xxx"></div><div class="x xxx"></div><div class="l l23"></div><div class="x xxx"></div><div class="s s11"></div><div class="s s12"></div><div class="s s13"></div><div class="s s14"></div><div class="s s13"></div><div class="s s14"></div><div class="s s11"></div><div class="s s12"></div><div class="l l31"></div><div class="l l12"></div><div class="l l13"></div><div class="r r22"></div><div class="x xxx"></div><div class="r r22"></div><div class="r r21"></div><div class="l l11"></div><div class="x xxx"></div><div class="l l22"></div><div class="l l21"></div><div class="r r21"></div><div class="s s13"></div><div class="s s14"></div><div class="l l22"></div><div class="l l21"></div><div class="l l22"></div><div class="l l21"></div><div class="s s13"></div><div class="s s14"></div><div class="r r21"></div><div class="x xxx"></div><div class="l l11"></div><div class="r r23"></div><div class="r r21"></div><div class="r r23"></div><div class="r r22"></div><div class="l l12"></div><div class="l l13"></div><div class="l l23"></div><div class="l l43"></div><div class="r r22"></div><div class="l l33"></div><div class="l l32"></div><div class="l l23"></div><div class="x xxx"></div><div class="l l23"></div><div class="l l43"></div><div class="s s11"></div><div class="s s12"></div><div class="r r22"></div><div class="r r21"></div><div class="l l12"></div><div class="l l13"></div><div class="r r22"></div><div class="x xxx"></div><div class="r r23"></div><div class="s s11"></div><div class="s s12"></div><div class="l l41"></div><div class="l l42"></div><div class="r r23"></div><div class="x xxx"></div><div class="l l31"></div><div class="s s11"></div><div class="s s12"></div><div class="l l41"></div><div class="l l42"></div><div class="s s13"></div><div class="s s14"></div><div class="r r23"></div><div class="r r22"></div><div class="x xxx"></div><div class="r r21"></div><div class="r r23"></div><div class="l l43"></div><div class="l l11"></div><div class="s s13"></div><div class="s s14"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="l l22"></div><div class="l l21"></div><div class="s s13"></div><div class="s s14"></div><div class="x xxx"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="r r23"></div><div class="x xxx"></div><div class="r r22"></div><div class="l l41"></div><div class="l l42"></div><div class="l l12"></div><div class="l l13"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="l l23"></div><div class="l l43"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="x xxx"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="r r23"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="s s11"></div><div class="s s12"></div><div class="l l22"></div><div class="l l21"></div><div class="l l41"></div><div class="l l42"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div><div class="x xxx"></div><div class="s s13"></div><div class="s s14"></div><div class="l l23"></div><div class="r r11"></div><div class="r r12"></div><div class="r r13"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
