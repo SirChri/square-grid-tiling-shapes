@@ -2,7 +2,7 @@ import os, subprocess, re, sys, json, ast
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 parent_path = my_path + "/.."
-inputs_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(parent_path, "./inputs")
+inputs_path = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(parent_path, "./inputs")
 outputs_path = os.path.abspath(sys.argv[2]) if len(sys.argv) > 2 else os.path.join(parent_path, "./outputs")
 
 rootDir = inputs_path

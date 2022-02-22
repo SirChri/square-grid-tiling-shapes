@@ -47,6 +47,11 @@
 Si consideri una scacchiera $n$ x $n$ ($n$ è dato in input). Si hanno a disposizione $l$ pezzi a forma di L, $s$ pezzi a forma di quadrato e $r$ pezzi a forma di rettangolo (si veda la figura, la dimensione del rettangolo è 3 x 1, il quadrato è 2 x 2 e il lato lungo della L è 2). $l$, $s$, $r$ sono dati in input. L'obbiettivo è di riempire la scacchiera con i pezzi a disposizione in maniera tale da minimizzare le celle vuote/free. Il requisito aggiuntivo è che $f$ celle (date in input) siano già occupate (quindi vietate).\\
 Si veda l'esempio (le celle grigie sono già occupate/vietate).
 
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/def1.png}
+\end{figure}
+
 \subsection{Considerazioni}
 Si presenterà un algoritmo che tenta di minimizzare le celle empty scegliendo da un sottoinsieme dei pezzi. \\
 Quindi si può dare in input un numero molto alto di pezzi al fine di ``semplificare" la minimizzazione, sebbene si rischia in questo caso di fare utilizzare gli stessi tipi di pezzi quasi ovunque.\\
@@ -73,10 +78,10 @@ Quindi ogni cella può assumere uno di quei valori dell'enumerazione, si è quin
 Ho utilizzato tale ``metodo" al fine di evitare sovrapposizioni indesiderate dei pezzi. \\
 E' possibile visualizzare il modello di minizinc a \texttt{./main.mzn} e di clingo/ASP a \texttt{./main.lp} per ulteriori dettagli implementativi.\\
 Per minizinc non sono state definite delle annotazioni di ricerca particolari (sebbene siano state tentate ma con migliorie pressoch\`e nulle).\\\\
-ASP/clingo viene lanciato con i seguenti parametri:\\\\
+Il modello scritto in ASP/clingo è stato sviluppato e testato con \texttt{clingo 5.5.1} e viene lanciato con i seguenti parametri:\\\\
 \hspace*{.5cm}\texttt{clingo $main.lp$ $input$ -t8 --quiet=1,1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy --opt-strategy=bb,inc}\\\\
 di cui gli unici di ottimizzazione \texttt{-t8 --configuration=frumpy --opt-strategy=bb,inc}; si è infatti evidenziato un notevole miglioramento dei tempi di risoluzione per certe istanze mediante l'ausilio di tali parametri. I restanti parametri sono utili solo a formattare l'output in un modo agevole per essere parsato dal \texttt{visualizer} (di cui discuteremo nella sezione 4).\\
-Minizinc viene lanciato con i seguenti parametri:\\\\
+Il modello di Minizinc è stato sviluppato e testato con \texttt{minizinc 2.5.5} (con \texttt{coinbc 2.10.5/1.17.5} e \texttt{gecode 6.3.0}) e viene lanciato con i seguenti parametri:\\\\
 \hspace*{.5cm}\texttt{minizinc $main.mzn$ $input$ -O2 --solver {} --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg "OPTIMUM"}\\\\
 di cui gli unici di ottimizzazione sono \texttt{-O2 -f}. Il primo risulta il miglior compromesso tra tempo di compilazione e guadagno in termini di tempi nella fase di risoluzione; il secondo invece, \texttt{-f} (free search), migliora i tempi di molte istanze prese in analisi. I restanti parametri sono utili solo a formattare l'output in modo agevole per il \texttt{visualizer}.
 
