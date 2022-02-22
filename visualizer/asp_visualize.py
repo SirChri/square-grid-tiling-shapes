@@ -10,11 +10,12 @@ class Cell:
 mainfile = sys.argv[1]
 inputfile = sys.argv[2]
 out_filepath = sys.argv[3] if len(sys.argv) > 3 else None
+file_path = os.path.abspath(os.path.dirname(__file__))
 
 if not out_filepath:
-    out_filepath = os.path.join(sys.path[0], 'output.html')
+    out_filepath = os.path.join(file_path, 'output.html')
 else:
-    shutil.copyfile(os.path.join(sys.path[0], 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
+    shutil.copyfile(os.path.join(file_path, 'static.css'), os.path.dirname(os.path.abspath(out_filepath))+"/static.css")
 
 bashCommand = "clingo {} {} -t8 --quiet=1,1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy --opt-strategy=bb,inc".format(mainfile, inputfile)
 process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
