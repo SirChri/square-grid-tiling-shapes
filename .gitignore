@@ -1,4 +1,5 @@
 relation/*
 !relation/rel.pdf
 !relation/rel.tex
+!relation/images
 examples/*

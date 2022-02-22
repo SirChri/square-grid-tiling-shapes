@@ -31,6 +31,7 @@ Both tested with python 3.10.2.
 The file `utils/input_gen.py` is used to generate random instances of both minizinc and asp "methods".\
 It takes 6 int parameters as input:\
 >> `python3 utils/input_gen.py q n l s r f output_path`
+
 where:\\
 * `q`: is the number of istances that we would like to create randomly;
 * `n`: is the board dimension
