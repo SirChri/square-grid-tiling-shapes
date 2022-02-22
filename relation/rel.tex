@@ -93,6 +93,7 @@ Avevo pensato ad altre due modellazioni che però nell'implementazione si sono r
 \end{itemize}
 
 \section{Utilities}
+Le utilities sono state sviluppate e testate con python 3.\\
 Sono state predisposte alcune utilities per velocizzare la fase di test. In particolare nella folder \texttt{./utils/} si trovano:
 \begin{itemize}
     \item \texttt{input\_gen.py} che prende in input 7 parametri:
@@ -106,17 +107,18 @@ Sono state predisposte alcune utilities per velocizzare la fase di test. In part
               \item $output\_path$ (OPZIONALE): path alla cartella dove verranno inseriti gli input generati; qualora non specificato, crea gli input salvandoli nella folder \texttt{../inputs} (che viene creata in automatico).
           \end{enumerate}
           Genera sia il \texttt{dzn} che il \texttt{lp}. Un esempio di esecuzione:
-          \texttt{python utils/input\_gen.py 1 10 10 7 10 10 10} 
+          \texttt{python3 utils/input\_gen.py 1 10 10 7 10 10 10} 
     \item \texttt{run\_tests.py} che prende in input 2 parametri:
           \begin{enumerate}
               \item $input\_path$ (OPZIONALE): path alla cartella dove verranno cercati gli input da lanciare; qualora non specificato, cerca gli input nella folder \texttt{../inputs};
               \item $output\_path$ (OPZIONALE): path alla cartella dove verranno inseriti gli output generati; qualora non specificato, crea gli output salvandoli nella folder \texttt{../outputs} (che viene creata in automatico).
           \end{enumerate}
           esegue i rispettivi visualizer a seconda del tipo di file in input. Genera anche un file \texttt{metadata.csv} all'interno dell'$output\_path$ che contiene le info circa l'esecuzione di ciascun solver (qualora non ci fossero errori). Un esempio di esecuzione:\\
-          \texttt{python utils/run\_tests.py}
+          \texttt{python3 utils/run\_tests.py}
 \end{itemize}
 
 \section{Visualizer delle soluzioni}
+I visualizer sono state sviluppati e testati con python 3.\\
 Per agevolare la visualizzazione dell'output dei solver (sia asp che minizinc) è stato predisposto un \texttt{visualizer} sia per clingo che per minizinc, scritto in python che riceve in input il main, l'input e opzionalmente dove salvare l'output e restituisce un file html che renderizza la griglia trovata dal solver (se non restituisce errori) in formato HTML + CSS.\\
 Più tecnicamente, per stampare l'output dell'input $i$ di clingo/asp salvato nella folder ./inputs/input$i$.lp (o di minizinc salvato nella folder ./inputs/input$i$.dzn), si può lanciare il seguente comando:\\\\
 \hspace*{.5cm}\texttt{python visualizer/asp\_visualize.py main.lp inputs/input$i$.lp outputs/asp$i$.html}\\

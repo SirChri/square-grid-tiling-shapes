@@ -9,6 +9,7 @@ rootDir = inputs_path
 
 files = [file for file in next(os.walk(rootDir))[2] if file.endswith('.dzn') or file.endswith('.lp')]
 
+print(outputs_path)
 #create output dir if not exists
 if len(files) > 0:  
     os.makedirs(outputs_path, exist_ok=True)
@@ -23,7 +24,7 @@ with open(os.path.join(outputs_path, "./metadata.csv"), "w") as text_file:
         print("running {}{}".format(filename,file_extension))
         if file_extension == ".dzn":
             #run first with gecode
-            bashCommand = "python {0}/visualizer/mzn_visualize.py gecode {0}/main.mzn {4}/{1} {3}/mzn-gecode{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
+            bashCommand = "python3 {0}/visualizer/mzn_visualize.py gecode {0}/main.mzn {4}/{1} {3}/mzn-gecode{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
             process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
             output, error = process.communicate()
             output = output.decode('utf-8')
@@ -35,13 +36,13 @@ with open(os.path.join(outputs_path, "./metadata.csv"), "w") as text_file:
                 
 
             #run with chuffed
-            # bashCommand = "python {0}/visualizer/mzn_visualize.py chuffed {0}/main.mzn {0}/inputs/{1} {0}/outputs/mzn-chuffed{2}.html".format(parent_path,file,input_num)
+            # bashCommand = "python3 {0}/visualizer/mzn_visualize.py chuffed {0}/main.mzn {0}/inputs/{1} {0}/outputs/mzn-chuffed{2}.html".format(parent_path,file,input_num)
             # process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
             # output, error = process.communicate()
             # print(output)
 
             #run first with gecode
-            bashCommand = "python {0}/visualizer/mzn_visualize.py coin-bc {0}/main.mzn {4}/{1} {3}/mzn-coinbc{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
+            bashCommand = "python3 {0}/visualizer/mzn_visualize.py coin-bc {0}/main.mzn {4}/{1} {3}/mzn-coinbc{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
             process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
             output, error = process.communicate()
             output = output.decode('utf-8')
@@ -53,7 +54,7 @@ with open(os.path.join(outputs_path, "./metadata.csv"), "w") as text_file:
 
         elif file_extension == ".lp":
             try:
-                bashCommand = "python {0}/visualizer/asp_visualize.py {0}/main.lp {4}/{1} {3}/asp{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
+                bashCommand = "python3 {0}/visualizer/asp_visualize.py {0}/main.lp {4}/{1} {3}/asp{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
                 process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
                 output, error = process.communicate()
                 output = output.decode('utf-8')
