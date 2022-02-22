@@ -26,10 +26,8 @@ f = {};""".format(n,l,s,r,f)
 
 couples = [(i+1,j+1) for i in range(n) for j in range(n)]
 
-print("creating {}".format(out_filepath))
 #create input dir if not exists
-if not os.path.exists(out_filepath):
-    os.mkdir(out_filepath)
+os.makedirs(out_filepath, exist_ok=True)
 
 #get current max input number of asp inputs (could either be for mzn)
 current_inputs = glob.glob(out_filepath+"/*.{}".format(lp_input_format))
