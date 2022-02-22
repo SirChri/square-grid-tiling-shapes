@@ -24,10 +24,11 @@ with open(os.path.join(outputs_path, "./metadata.csv"), "w") as text_file:
         print("running {}{}".format(filename,file_extension))
         if file_extension == ".dzn":
             #run first with gecode
-            bashCommand = "python3 {0}/visualizer/mzn_visualize.py gecode {0}/main.mzn {4}/{1} {3}/mzn-gecode{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
-            process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+            bashCommand = 'python3 "{0}/visualizer/mzn_visualize.py" gecode "{0}/main.mzn" "{4}/{1}" "{3}/mzn-gecode{2}.html"'.format(parent_path,file,input_num,outputs_path,inputs_path)
+            process = subprocess.Popen(bashCommand, shell=True, stdout=subprocess.PIPE)
             output, error = process.communicate()
             output = output.decode('utf-8')
+            
             out = ast.literal_eval(output)
             if "time" in out:
                 text_file.write("{},minizinc-gecode,{},{},{},{},{},{},{},{}\n".format(filename,out["n"],out["l"],out["s"],out["r"],out["f"],out["time"],out["cost"],out["opt"]))
@@ -42,8 +43,8 @@ with open(os.path.join(outputs_path, "./metadata.csv"), "w") as text_file:
             # print(output)
 
             #run first with gecode
-            bashCommand = "python3 {0}/visualizer/mzn_visualize.py coin-bc {0}/main.mzn {4}/{1} {3}/mzn-coinbc{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
-            process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+            bashCommand = 'python3 "{0}/visualizer/mzn_visualize.py" coin-bc "{0}/main.mzn" "{4}/{1}" "{3}/mzn-gecode{2}.html"'.format(parent_path,file,input_num,outputs_path,inputs_path)
+            process = subprocess.Popen(bashCommand, shell=True, stdout=subprocess.PIPE)
             output, error = process.communicate()
             output = output.decode('utf-8')
             out = ast.literal_eval(output)
@@ -54,8 +55,8 @@ with open(os.path.join(outputs_path, "./metadata.csv"), "w") as text_file:
 
         elif file_extension == ".lp":
             try:
-                bashCommand = "python3 {0}/visualizer/asp_visualize.py {0}/main.lp {4}/{1} {3}/asp{2}.html".format(parent_path,file,input_num,outputs_path,inputs_path)
-                process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+                bashCommand = 'python3 "{0}/visualizer/asp_visualize.py" "{0}/main.lp" "{4}/{1}" "{3}/asp{2}.html"'.format(parent_path,file,input_num,outputs_path,inputs_path)
+                process = subprocess.Popen(bashCommand, shell=True, stdout=subprocess.PIPE)
                 output, error = process.communicate()
                 output = output.decode('utf-8')
                 

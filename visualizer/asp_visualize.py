@@ -21,8 +21,8 @@ os.makedirs(basedir, exist_ok=True)
 
 shutil.copyfile(os.path.join(file_path, 'static.css'), basedir+"/static.css")
 
-bashCommand = "clingo {} {} -t8 --quiet=1,1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy --opt-strategy=bb,inc".format(mainfile, inputfile)
-process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+bashCommand = 'clingo "{}" "{}" -t8 --quiet=1,1 --out-hide-aux --outf=2 --time-limit=300 --warn none --configuration=frumpy --opt-strategy=bb,inc'.format(mainfile, inputfile)
+process = subprocess.Popen(bashCommand, shell=True, stdout=subprocess.PIPE)
 output, error = process.communicate()
 output = output.decode('utf-8')
 

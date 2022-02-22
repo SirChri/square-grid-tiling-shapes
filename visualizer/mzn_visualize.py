@@ -16,12 +16,12 @@ os.makedirs(basedir, exist_ok=True)
 
 shutil.copyfile(os.path.join(file_path, 'static.css'), basedir+"/static.css")
 
-bashCommand = 'minizinc {} {} -O2 --solver {} --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg "OPTIMUM"'.format(mainfile, inputfile, solver)
-process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+bashCommand = 'minizinc "{}" "{}" -O2 --solver {} --time-limit 300000 -p12 -f --output-mode json -s --soln-separator "" --search-complete-msg "OPTIMUM"'.format(mainfile, inputfile, solver)
+process = subprocess.Popen(bashCommand, shell=True, stdout=subprocess.PIPE)
 output, error = process.communicate()
 output = output.decode('utf-8')
 
-jsondata = re.sub(r'^\%.*\n?|^\"\"|^\"OPTIMUM\"', '', output, flags=re.MULTILINE).strip()
+jsondata = re.sub(r'^\%.*\n?|^\"\"|^OPTIMUM', '', output, flags=re.MULTILINE).strip()
 statsdata = {}
 
 if error:
@@ -30,7 +30,7 @@ if error:
 
 optimum_found = False
 for line in output.splitlines():
-    if(line.strip() == '\"OPTIMUM\"'):
+    if(line.strip() == 'OPTIMUM'):
         optimum_found = True
 
     if(line.startswith("%%%mzn-stat: ")):
