@@ -12,8 +12,7 @@ if not out_filepath:
 
 basedir = os.path.dirname(os.path.abspath(out_filepath))
 
-if not os.path.exists(basedir):
-    os.mkdir(basedir)
+os.makedirs(basedir, exist_ok=True)
 
 shutil.copyfile(os.path.join(file_path, 'static.css'), basedir+"/static.css")
 
