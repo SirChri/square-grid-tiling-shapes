@@ -106,8 +106,8 @@ Sono state predisposte alcune utilities per velocizzare la fase di test. In part
               \item $f$: numero di celle proibite (scelte random);
               \item $output\_path$ (OPZIONALE): path alla cartella dove verranno inseriti gli input generati; qualora non specificato, crea gli input salvandoli nella folder \texttt{../inputs} (che viene creata in automatico).
           \end{enumerate}
-          Genera sia il \texttt{dzn} che il \texttt{lp}. Un esempio di esecuzione:
-          \texttt{python3 utils/input\_gen.py 1 10 10 7 10 10 10} 
+          Genera sia il \texttt{dzn} che il \texttt{lp}. Un esempio di esecuzione:\\
+          \texttt{python3 utils/input\_gen.py 1 10 10 7 10 10} 
     \item \texttt{run\_tests.py} che prende in input 2 parametri:
           \begin{enumerate}
               \item $input\_path$ (OPZIONALE): path alla cartella dove verranno cercati gli input da lanciare; qualora non specificato, cerca gli input nella folder \texttt{../inputs};
@@ -121,8 +121,8 @@ Sono state predisposte alcune utilities per velocizzare la fase di test. In part
 I visualizer sono state sviluppati e testati con python 3.\\
 Per agevolare la visualizzazione dell'output dei solver (sia asp che minizinc) è stato predisposto un \texttt{visualizer} sia per clingo che per minizinc, scritto in python che riceve in input il main, l'input e opzionalmente dove salvare l'output e restituisce un file html che renderizza la griglia trovata dal solver (se non restituisce errori) in formato HTML + CSS.\\
 Più tecnicamente, per stampare l'output dell'input $i$ di clingo/asp salvato nella folder ./inputs/input$i$.lp (o di minizinc salvato nella folder ./inputs/input$i$.dzn), si può lanciare il seguente comando:\\\\
-\hspace*{.5cm}\texttt{python visualizer/asp\_visualize.py main.lp inputs/input$i$.lp outputs/asp$i$.html}\\
-\hspace*{.5cm}\texttt{python visualizer/mzn\_visualize.py $solver$ main.mzn inputs/input$i$.dzn outputs/mzn-$solver$$i$.html}\\\\
+\hspace*{.5cm}\texttt{python3 visualizer/asp\_visualize.py main.lp inputs/input$i$.lp outputs/asp$i$.html}\\
+\hspace*{.5cm}\texttt{python3 visualizer/mzn\_visualize.py $solver$ main.mzn inputs/input$i$.dzn outputs/mzn-$solver$$i$.html}\\\\
 e aprendo il file \texttt{outputs/asp$i$.html} (o mzn-$solver$$i$.html) si potrà visualizzare la soluzione visivamente con le relative stats. Per minizinc $solver$ può essere $gecode$ oppure $coinbc$.\\
 Sia minizinc che ASP all'interno dei rispettivi visualizer vengono eseguiti con dei parametri customizzati per restituire gli output in json per poi essere utilizzati comodamente dal visualizer. I parametri di ottimizzazione invece vengono descritti nella sezione successiva.\\
 Il terzo parametro è opzionale. Qualora non fosse specificato, l'output viene salvato automaticamente nella folder \texttt{outputs}.\\
