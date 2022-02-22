@@ -6,7 +6,7 @@ l = int(sys.argv[3])
 s = int(sys.argv[4])
 r = int(sys.argv[5])
 f = int(sys.argv[6])
-out_filepath = sys.argv[8] if len(sys.argv) > 8 else os.path.join(sys.path[0] +"/..", 'inputs')
+out_filepath = os.path.abspath(sys.argv[7]) if len(sys.argv) > 7 else os.path.join(sys.path[0] +"/..", 'inputs')
 
 #default for asp
 lp_input_format = "lp"
@@ -26,8 +26,9 @@ f = {};""".format(n,l,s,r,f)
 
 couples = [(i+1,j+1) for i in range(n) for j in range(n)]
 
+print(out_filepath)
 #create input dir if not exists
-os.makedirs(os.path.abspath(out_filepath), exist_ok=True)
+os.makedirs(out_filepath, exist_ok=True)
 
 #get current max input number of asp inputs (could either be for mzn)
 current_inputs = glob.glob(out_filepath+"/*.{}".format(lp_input_format))
