@@ -3,3 +3,6 @@ relation/*
 !relation/rel.tex
 !relation/images
 examples/*
+interactive/node_modules
+interactive/package-lock.json
+.DS_Store
