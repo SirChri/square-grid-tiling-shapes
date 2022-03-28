@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import config from './config';
+import utils from './utils';
 
 var Clingo = require('clingojs');
 
@@ -14,9 +15,12 @@ router.post('/', async (req, res) => {
 		clingo: config.clingo_path
 	});
 	
+	var input = utils.generateInputFileContent(req.body);
+	
 	var out = {};
 	await new Promise(resolve => clingo.solve({
-		inputFiles: ['/Users/christian/Documents/Git/square-grid-tiling-shapes/main.lp', '/Users/christian/Documents/Git/square-grid-tiling-shapes/examples/inputs/input'+req.params.input+'.lp'],
+		input: input,
+		inputFiles: [config.main_file_path],
 		maxModels: 0,
 		args: [
 			"--time-limit=300",
@@ -44,7 +48,7 @@ router.post('/', async (req, res) => {
 					out["cost"] = cells.filter(r => r.val == "eee").length
 					out["model"] = cells;
 
-					res.write(JSON.stringify(out))
+					//res.write(JSON.stringify(out))
 				}
 			}
 		})
