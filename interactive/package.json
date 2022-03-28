@@ -1,7 +1,7 @@
 {
-  "name": "full-stack-boilerplate",
+  "name": "square-grid-tiling-shapes",
   "version": "0.0.1",
-  "description": "A basic full-stack boilerplate (including express and mongoose)",
+  "description": "A simple website that runs clingo to (try to) solve the square grid tiling problem.",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist/*",
@@ -12,7 +12,7 @@
     "serve": "node server-dist"
   },
   "author": "Christian Londero",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/plugin-transform-runtime": "^7.17.0",
