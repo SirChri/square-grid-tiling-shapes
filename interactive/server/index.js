@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 // this is needed by the client-side routing facility (i.e., page)
 import history from 'express-history-api-fallback';
 import solve from './solve';
+import download from './download';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(function(req, res, next) {
 });
 // here you can put the specific REST mountpoints
 app.use('/api/solve', solve);
+app.use('/api/download', download);
 
 // this will serve also the front-end from the dist directory
 app.use('/', express.static('dist'));
