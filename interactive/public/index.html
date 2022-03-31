@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	<title>Express</title>
+	<link rel="stylesheet" href="/stylesheets/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="./javascripts/main.js"></script>
+</head>
+
+<body>
+	<div style="height:100%">
+		<div class="ui grid" style="min-height: 100%">
+			<div class="six wide column">
+				<div style="padding:20px">
+					<div class="solve-form ui container">
+						<h2 class="ui header">
+							<i class="plug icon"></i>
+							<div class="content">
+								Input
+							</div>
+						</h2>
+						<form class="ui form" id="solve-form">
+							<div class="field">
+								<label>Grid dimension</label>
+								<input id="grid-dimension" type="number" class="numfield" pattern="[0-9]*" name="n"
+									placeholder="6">
+							</div>
+							<div class="three fields">
+								<div class="field">
+									<label>Number of ls</label>
+									<input type="number" class="numfield" pattern="[0-9]*" name="l" placeholder="5">
+								</div>
+								<div class="field">
+									<label>Number of squares</label>
+									<input type="number" class="numfield" pattern="[0-9]*" name="s" placeholder="5">
+								</div>
+								<div class="field">
+									<label>Number of rectangles</label>
+									<input type="number" class="numfield" pattern="[0-9]*" name="r" placeholder="5">
+								</div>
+							</div>
+							<div class="ui error message">
+								<div class="header">Error</div>
+								<p>Placeholder for error message.</p>
+							</div>
+							<button class="ui button" type="submit">Submit</button>
+							<button class="ui button" type="reset">Reset</button>
+							<button class="ui button" type="dwinput">Download input</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div id="solution" class="ten wide column">
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

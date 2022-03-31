@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     /**
      * 
      * @param {Object} data 

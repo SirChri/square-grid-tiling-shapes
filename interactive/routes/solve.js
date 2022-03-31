@@ -1,23 +1,20 @@
-import { Router } from 'express';
-import config from './config';
-import utils from './utils';
-
+var config = require('./config');
+var utils = require('./utils');
 var Clingo = require('clingojs');
 
-const router = Router();
+var express = require('express');
+var router = express.Router();
 
 router.post('/', async (req, res) => {
 	//set the appropriate HTTP header
 	res.setHeader('Content-Type', 'application/json');
-
-	//console.log(req.body)
-	var clingo = new Clingo({
-		clingo: config.clingo_path
-	});
-	
 	var input = utils.generateInputFileContent(req.body);
 	
 	var out = {};
+
+	var clingo = new Clingo({
+		clingo: config.clingo_path
+	});
 	await new Promise(resolve => clingo.solve({
 		input: input,
 		inputFiles: [config.main_file_path],
@@ -47,13 +44,12 @@ router.post('/', async (req, res) => {
 
 					out["cost"] = cells.filter(r => r.val == "eee").length
 					out["model"] = cells;
-
-					//res.write(JSON.stringify(out))
 				}
 			}
 		})
 		.on('end', function () {
 			res.write(JSON.stringify(out))
+            
 			// This function gets called after all models have been received
 			resolve()
 		}));
@@ -62,4 +58,4 @@ router.post('/', async (req, res) => {
 	res.end();
 });
 
-export default router;
+module.exports = router;

@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import config from './config';
-import utils from './utils';
+var config = require('./config');
+var utils = require('./utils');
 
-const router = Router();
+var express = require('express');
+var router = express.Router();
 
 router.post('/input', (req, res) => {
 	var input = utils.generateInputFileContent(req.body);
@@ -14,4 +14,4 @@ router.post('/input', (req, res) => {
     res.end();
 });
 
-export default router;
+module.exports = router;
