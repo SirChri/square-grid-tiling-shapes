@@ -22,18 +22,16 @@ $(document).ready(function () {
 		var element = document.createElement('a');
 		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
 		element.setAttribute('download', filename);
-	
+
 		element.style.display = 'none';
 		document.body.appendChild(element);
-	
+
 		element.click();
-	
+
 		document.body.removeChild(element);
 	}
 
-	//on n change, update the grid
-	$("#grid-dimension").on("input", function () {
-		var n = parseInt(this.value);
+	function enableCellSelection(n) {
 		if (n > 49 || n < 1) {
 			return;
 		}
@@ -43,30 +41,67 @@ $(document).ready(function () {
 		$("#solution").empty();
 		$("#solution").append(generateGrid(n, n));
 
-		$("#solution .solgrid .selectable").on("click", function () {
-			var cellData = $(this).data();
+		function toggleCell(cell) {
+			var cellData = $(cell).data();
 			var row = cellData.row
 			var col = cellData.col
 			var key = row + "_" + col;
 
 			if (form.forbiddenValues[key]) {
 				delete form.forbiddenValues[key];
-				$(this).removeClass('selected');
+				$(cell).removeClass('selected');
 			} else {
 				form.forbiddenValues[key] = {
 					col: col,
 					row: row
 				}
-				$(this).addClass('selected');
+				$(cell).addClass('selected');
+			}
+		}
+
+		var isMouseDown = false;
+		$("#solution .solgrid .selectable").mousedown(function () {
+			isMouseDown = true;
+			toggleCell(this);
+			return false; // prevent text selection
+		}).mouseover(function () {
+			if (isMouseDown) {
+				toggleCell(this);
 			}
 		});
+
+		$(document).mouseup(function () {
+			isMouseDown = false;
+		});
+	}
+
+	//on n change, update the grid
+	$("#grid-dimension").on("input", function () {
+		if (this.value)
+			enableCellSelection(parseInt(this.value))
 	})
 
 	//reset btn
 	$(form.id).find('button[type="reset"]').on("click", function (event) {
 		event.preventDefault();
 		$(form.id).find("input").val("");
+		form.forbiddenValues = {}
 		$("#solution").empty();
+	});
+
+
+	$(form.id).find('button[type="reset-form"]').on("click", function (event) {
+		event.preventDefault();
+		var n = $("#grid-dimension").val();
+
+		if (n) {
+			n = parseInt(n)
+			$("#solution").empty();
+			form.forbiddenValues = {}
+			$("#solution").append(generateGrid(n, n));
+
+			enableCellSelection(n)
+		}
 	});
 
 	//submit btn

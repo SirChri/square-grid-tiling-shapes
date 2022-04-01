@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 		maxModels: 0,
 		args: [
 			"--time-limit=300",
-			"-t4",
+			"-t8",
 			"--quiet=1,1",
 			"--out-hide-aux",
 			"--opt-strategy=bb,inc"
