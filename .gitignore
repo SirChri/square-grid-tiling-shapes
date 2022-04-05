@@ -2,7 +2,7 @@ relation/*
 !relation/rel.pdf
 !relation/rel.tex
 !relation/images
-examples/*
-interactive/node_modules
-interactive/package-lock.json
+old/examples/*
+node_modules
+package-lock.json
 .DS_Store
