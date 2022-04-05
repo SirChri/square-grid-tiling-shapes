@@ -125,7 +125,7 @@ $(document).ready(function () {
 		for (const val in forbiddenValuesRaw) {
 			forbiddenVals.push(forbiddenValuesRaw[val])
 		}
-		const timelimit = parseInt($("#time-limit").val()),
+		const timelimit = Math.max(parseInt($("#time-limit").val()) * 1000 + 5000, 60000),
 			data = {
 				forbidden: forbiddenVals,
 				timelimit: timelimit
@@ -135,6 +135,7 @@ $(document).ready(function () {
 			data[field.name] = field.value;
 		});
 		$(form.id).addClass("loading");
+
 		$.ajax({
 			url: "/api/solve",
 			type: "post",
@@ -142,7 +143,7 @@ $(document).ready(function () {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			timeout: timelimit * 1000 + 5000, //add 5 secs to the limit 
+			timeout: timelimit, //add 5 secs to the limit 
 			data: JSON.stringify(data),
 			success: function (data) {
 				var opt = data.opt,
@@ -152,6 +153,15 @@ $(document).ready(function () {
 					n = $("#grid-dimension").val(),
 					cells = {},
 					htmlcontent = "";
+
+				if (!model) {
+					$("#result").hide();
+					$(form.id).addClass('error');
+					$(form.id).removeClass("loading");
+					$(form.id).find('.message p').text("No models have been found. Try increment time-limit value.");
+					$(form.id).find('.message').show();
+					return;
+				}
 
 				for (const cell of model) {
 					var x = cell.x,
@@ -182,6 +192,7 @@ $(document).ready(function () {
 				$(form.id).removeClass("loading");
 			},
 			error: function (err) {
+				$("#result").hide();
 				$(form.id).addClass('error');
 				$(form.id).removeClass("loading");
 				$(form.id).find('.message p').text(err);

@@ -32,6 +32,7 @@ router.post('/', async (req, res) => {
 	})
 		.on('model', function (model) {
 			if (model) {
+				console.log("oooo ",model)
 				model = model.filter((v) => {
 					return v != ""
 				});

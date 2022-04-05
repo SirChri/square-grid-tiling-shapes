@@ -18,3 +18,6 @@ I wrote a node site that relies on [clingojs](https://github.com/dousto/clingojs
 1. open your browser at `https://localhost:3000` and enjoy.
 
 ![Site solver](preview.gif?raw=true)
+
+### Notes
+Developed and tested with `node v17.7.2`.
